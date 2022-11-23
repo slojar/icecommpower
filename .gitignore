@@ -1,0 +1,19 @@
+.env
+*.env
+*.db.sqlite3
+*.db.sqlite
+icecommpower/db.sqlite3
+__pycache__/
+*.pyc
+.idea
+*.idea
+.idea/*
+icecommpower.log
+*.log
+*.sqlite
+*.sqlite3
+.DS_Store
+*.DS_Store
+
+# Project image and file folders
+profile-pictures/
