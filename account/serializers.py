@@ -7,27 +7,6 @@ from icecommpower.exceptions import InvalidRequestException
 from superadmin.utils import process_payment_with_card, generate_paystack_ref_no
 
 
-class UserSignUpSerializerIn(serializers.ModelSerializer):
-    email = serializers.EmailField()
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email', 'password')
-
-    def create(self, validated_data):
-        first_name = validated_data.get('first_name')
-        last_name = validated_data.get('last_name')
-        email = username = validated_data.get('email').lower()
-        password = validated_data.get('password')
-
-        user, _ = User.objects.get_or_create(username=username)
-        user.first_name = first_name
-        user.last_name = last_name
-        user.email = email
-        user.set_password(password)
-        user.save()
-        return user
-
-
 class CustomerSerializer(serializers.ModelSerializer):
     current_user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     full_name = serializers.CharField(source='get_full_name', read_only=True)
@@ -112,9 +91,7 @@ class TransactionSerializerIn(serializers.ModelSerializer):
         fields = ('customer', 'payment_method', 'amount', 'description')
 
     def create(self, validated_data):
-        # customer = validated_data.get('customer')
         payment_method = validated_data.get('payment_method')
-        # amount = validated_data.get('amount')
         request = self.context.get('request')
         payment_link = None
 

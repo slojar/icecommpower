@@ -43,3 +43,4 @@ def raise_serializer_error_msg(errors: {}):
                         data['detail'] = msg
 
         raise InvalidRequestException(data)
+
